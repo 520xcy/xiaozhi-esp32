@@ -16,9 +16,9 @@
 #define TAG "LcdDisplay"
 
 // Color definitions for dark theme
-#define DARK_BACKGROUND_COLOR       lv_color_hex(0x121212)     // Dark background
+#define DARK_BACKGROUND_COLOR       lv_color_black()       // Dark background
 #define DARK_TEXT_COLOR             lv_color_white()           // White text
-#define DARK_CHAT_BACKGROUND_COLOR  lv_color_hex(0x1E1E1E)     // Slightly lighter than background
+#define DARK_CHAT_BACKGROUND_COLOR  lv_color_hex(0x121212)      // Slightly lighter than background
 #define DARK_USER_BUBBLE_COLOR      lv_color_hex(0x1A6C37)     // Dark green
 #define DARK_ASSISTANT_BUBBLE_COLOR lv_color_hex(0x333333)     // Dark gray
 #define DARK_SYSTEM_BUBBLE_COLOR    lv_color_hex(0x2A2A2A)     // Medium gray

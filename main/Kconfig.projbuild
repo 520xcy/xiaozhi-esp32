@@ -270,7 +270,8 @@ choice BOARD_TYPE
         select LV_USE_GIF
         select LV_GIF_CACHE_DECODE_DATA
     config BOARD_TYPE_2_tft
-        bool "2.0tft"           
+        bool "2.0tft"    
+        depends on IDF_TARGET_ESP32S3
 endchoice
 
 choice ESP_S3_LCD_EV_Board_Version_TYPE
