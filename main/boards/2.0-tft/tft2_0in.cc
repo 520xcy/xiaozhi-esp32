@@ -91,7 +91,7 @@ private:
                                { Application::GetInstance().StopListening(); });
 
         // 初始化音量增加按钮
-        volume_up_button_.OnClick([this]()
+        volume_down_button_.OnClick([this]()
                                   {
             auto codec = GetAudioCodec();
             auto volume = codec->output_volume() + 10;
@@ -102,13 +102,13 @@ private:
             GetDisplay()->ShowNotification(Lang::Strings::VOLUME + std::to_string(volume)); });
 
         // 音量增加按钮长按设置为最大音量
-        volume_up_button_.OnLongPress([this]()
+        volume_down_button_.OnLongPress([this]()
                                       {
             GetAudioCodec()->SetOutputVolume(100);
             GetDisplay()->ShowNotification(Lang::Strings::MAX_VOLUME); });
 
         // 初始化音量减少按钮
-        volume_down_button_.OnClick([this]()
+        volume_up_button_.OnClick([this]()
                                     {
             auto codec = GetAudioCodec();
             auto volume = codec->output_volume() - 10;
@@ -119,7 +119,7 @@ private:
             GetDisplay()->ShowNotification(Lang::Strings::VOLUME + std::to_string(volume)); });
 
         // 音量减少按钮长按设置为静音
-        volume_down_button_.OnLongPress([this]()
+        volume_up_button_.OnLongPress([this]()
                                         {
             GetAudioCodec()->SetOutputVolume(0);
             GetDisplay()->ShowNotification(Lang::Strings::MUTED); });
