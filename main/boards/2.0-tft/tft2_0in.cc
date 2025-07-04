@@ -17,7 +17,7 @@
 #include <driver/i2c_master.h>
 #include <driver/spi_common.h>
 #include <wifi_station.h>
-#include "otto_emoji_display.h"
+
 #include <driver/rtc_io.h>
 #include <esp_sleep.h>
 #include "otto_movements.h"
