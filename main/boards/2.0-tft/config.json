@@ -2,7 +2,7 @@
     "target": "esp32s3",
     "builds": [
         {
-            "name": "2.0tft-dev",
+            "name": "2.0-tft",
             "sdkconfig_append": [
             ]
         }
