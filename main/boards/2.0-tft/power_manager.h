@@ -6,8 +6,11 @@
 #include <esp_log.h>
 #include <esp_timer.h>
 
+#include <functional>
+
 class PowerManager {
 private:
+    std::function<void(bool)> on_charging_status_changed_;
     // 电池电量区间-分压电阻为2个100k
     static constexpr struct {
         uint16_t adc;
@@ -34,13 +37,21 @@ private:
       if (battery_update_paused_) {
         return;
       }
-      
+
       ReadBatteryAdcData();
 
+      bool new_charging_status;
       if (charging_pin_ == GPIO_NUM_NC) {
-        is_charging_ = false;
+        new_charging_status = false;
       } else {
-        is_charging_ = gpio_get_level(charging_pin_) == 0;
+        new_charging_status = gpio_get_level(charging_pin_) == 0;
+      }
+
+      if (new_charging_status != is_charging_) {
+        is_charging_ = new_charging_status;
+        if (on_charging_status_changed_) {
+          on_charging_status_changed_(is_charging_);
+        }
       }
     }
 
@@ -143,6 +154,11 @@ public:
     bool IsCharging() { return is_charging_; }
 
     uint8_t GetBatteryLevel() { return battery_level_; }
+
+    // 注册充电状态变化回调（充电开始/停止时触发）
+    void OnChargingStatusChanged(std::function<void(bool)> callback) {
+        on_charging_status_changed_ = callback;
+    }
 
     // 暂停/恢复电量更新（用于动作执行时屏蔽更新）
     static void PauseBatteryUpdate() { battery_update_paused_ = true; }
